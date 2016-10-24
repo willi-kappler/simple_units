@@ -12,166 +12,105 @@ use std::ops::Mul;
 use std::ops::Div;
 use std::cmp::PartialEq;
 
-#[derive(Debug)]
-pub struct Meter(pub f64);
+macro_rules! init_unit {
+    ($i:ident) => {
+        #[derive(Debug)]
+        pub struct $i(pub f64);
 
-impl PartialEq for Meter {
-    fn eq(self: &Meter, &Meter(rhs): &Meter) -> bool {
-        let Meter(lhs) = *self;
-        lhs == rhs
+        impl PartialEq for $i {
+            fn eq(self: &$i, &$i(rhs): &$i) -> bool {
+                let $i(lhs) = *self;
+                lhs == rhs
+            }
+        }
+
+        impl Add for $i {
+            type Output = $i;
+
+            fn add(self: $i, $i(rhs): $i) -> $i {
+                let $i(lhs) = self;
+                $i(lhs + rhs)
+            }
+        }
+
+        impl Sub for $i {
+            type Output = $i;
+
+            fn sub(self: $i, $i(rhs): $i) -> $i {
+                let $i(lhs) = self;
+                $i(lhs - rhs)
+            }
+        }
+
+        impl Mul<f64> for $i {
+            type Output = $i;
+
+            fn mul(self: $i, rhs: f64) -> $i {
+                let $i(lhs) = self;
+                $i(lhs * rhs)
+            }
+        }
+
+        impl Div<f64> for $i {
+            type Output = $i;
+
+            fn div(self: $i, rhs: f64) -> $i {
+                let $i(lhs) = self;
+                $i(lhs / rhs)
+            }
+        }
+
+        impl Div<$i> for $i {
+            type Output = f64;
+
+            fn div(self: $i, $i(rhs): $i) -> f64 {
+                let $i(lhs) = self;
+                lhs / rhs
+            }
+        }
     }
 }
 
-impl Add for Meter {
-    type Output = Meter;
+macro_rules! mul_unit {
+    ($i1:ident, $i2:ident, $i3:ident) => {
+        impl Mul<$i2> for $i1 {
+            type Output = $i3;
 
-    fn add(self: Meter, Meter(rhs): Meter) -> Meter {
-        let Meter(lhs) = self;
-        Meter(lhs + rhs)
+            fn mul(self: $i1, $i2(rhs): $i2) -> $i3 {
+                let $i1(lhs) = self;
+                $i3(lhs * rhs)
+            }
+        }
     }
 }
 
-impl Sub for Meter {
-    type Output = Meter;
+macro_rules! div_unit {
+    ($i1:ident, $i2:ident, $i3:ident) => {
+        impl Div<$i2> for $i1 {
+            type Output = $i3;
 
-    fn sub(self: Meter, Meter(rhs): Meter) -> Meter {
-        let Meter(lhs) = self;
-        Meter(lhs - rhs)
+            fn div(self: $i1, $i2(rhs): $i2) -> $i3 {
+                let $i1(lhs) = self;
+                $i3(lhs / rhs)
+            }
+        }
     }
 }
 
-impl Mul<Meter> for Meter {
-    type Output = Meter2;
+init_unit!(Meter);
 
-    fn mul(self: Meter, Meter(rhs): Meter) -> Meter2 {
-        let Meter(lhs) = self;
-        Meter2(lhs * rhs)
-    }
-}
+init_unit!(Meter2);
 
-impl Mul<f64> for Meter {
-    type Output = Meter;
+mul_unit!(Meter, Meter, Meter2);
 
-    fn mul(self: Meter, rhs: f64) -> Meter {
-        let Meter(lhs) = self;
-        Meter(lhs * rhs)
-    }
-}
+init_unit!(Second);
 
-impl Div<Meter> for Meter {
-    type Output = f64;
+init_unit!(Second2);
 
-    fn div(self: Meter, Meter(rhs): Meter) -> f64 {
-        let Meter(lhs) = self;
-        lhs / rhs
-    }
-}
+mul_unit!(Second, Second, Second2);
 
-impl Div<Second> for Meter {
-    type Output = MeterPerSecond;
+init_unit!(MeterPerSecond);
 
-    fn div(self: Meter, Second(rhs): Second) -> MeterPerSecond {
-        let Meter(lhs) = self;
-        MeterPerSecond(lhs / rhs)
-    }
-}
+div_unit!(Meter, Second, MeterPerSecond);
 
-
-#[derive(Debug)]
-pub struct Meter2(pub f64);
-
-impl PartialEq for Meter2 {
-    fn eq(self: &Meter2, &Meter2(rhs): &Meter2) -> bool {
-        let Meter2(lhs) = *self;
-        lhs == rhs
-    }
-}
-
-
-#[derive(Debug)]
-pub struct Second(pub f64);
-
-impl Add for Second {
-    type Output = Second;
-
-    fn add(self: Second, Second(rhs): Second) -> Second {
-        let Second(lhs) = self;
-        Second(lhs + rhs)
-    }
-}
-
-impl Sub for Second {
-    type Output = Second;
-
-    fn sub(self: Second, Second(rhs): Second) -> Second {
-        let Second(lhs) = self;
-        Second(lhs - rhs)
-    }
-}
-
-impl Mul<Second> for Second {
-    type Output = Second2;
-
-    fn mul(self: Second, Second(rhs): Second) -> Second2 {
-        let Second(lhs) = self;
-        Second2(lhs * rhs)
-    }
-}
-
-impl Mul<f64> for Second {
-    type Output = Second;
-
-    fn mul(self: Second, rhs: f64) -> Second {
-        let Second(lhs) = self;
-        Second(lhs * rhs)
-    }
-}
-
-impl Div<Second> for Second {
-    type Output = f64;
-
-    fn div(self: Second, Second(rhs): Second) -> f64 {
-        let Second(lhs) = self;
-        lhs / rhs
-    }
-}
-
-#[derive(Debug)]
-pub struct Second2(pub f64);
-
-#[derive(Debug)]
-pub struct MeterPerSecond(pub f64);
-
-impl PartialEq for MeterPerSecond {
-    fn eq(self: &MeterPerSecond, &MeterPerSecond(rhs): &MeterPerSecond) -> bool {
-        let MeterPerSecond(lhs) = *self;
-        lhs == rhs
-    }
-}
-
-impl Add for MeterPerSecond {
-    type Output = MeterPerSecond;
-
-    fn add(self: MeterPerSecond, MeterPerSecond(rhs): MeterPerSecond) -> MeterPerSecond {
-        let MeterPerSecond(lhs) = self;
-        MeterPerSecond(lhs + rhs)
-    }
-}
-
-impl Sub for MeterPerSecond {
-    type Output = MeterPerSecond;
-
-    fn sub(self: MeterPerSecond, MeterPerSecond(rhs): MeterPerSecond) -> MeterPerSecond {
-        let MeterPerSecond(lhs) = self;
-        MeterPerSecond(lhs - rhs)
-    }
-}
-
-impl Mul<Second> for MeterPerSecond {
-    type Output = Meter;
-
-    fn mul(self: MeterPerSecond, Second(rhs): Second) -> Meter {
-        let MeterPerSecond(lhs) = self;
-        Meter(lhs * rhs)
-    }
-}
+mul_unit!(MeterPerSecond, Second, Meter);
