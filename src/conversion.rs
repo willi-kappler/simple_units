@@ -1,28 +1,35 @@
 //! Conversion between units
 
-#[derive(Debug)]
-pub struct Foot(pub f64);
+use std::ops::Add;
+use std::ops::Sub;
+use std::ops::Mul;
+use std::ops::Div;
+use std::cmp::PartialEq;
 
-#[derive(Debug)]
-pub struct Yard(pub f64);
+use ::si_units::*;
 
-#[derive(Debug)]
-pub struct Mile(pub f64);
+const METER_TO_FOOT: f64 = 3.28084;
+const METER_TO_YARD: f64 = 1.09361;
+const METER_TO_MILE: f64 = 0.000621371;
+
+init_unit!(Foot);
+init_unit!(Yard);
+init_unit!(Mile);
 
 impl From<Meter> for Foot {
     fn from(Meter(value): Meter) -> Self {
-        Foot(value * 3.28084)
+        Foot(value * METER_TO_FOOT)
     }
 }
 
 impl From<Meter> for Yard {
     fn from(Meter(value): Meter) -> Self {
-        Yard(value * 1.09361)
+        Yard(value * METER_TO_YARD)
     }
 }
 
 impl From<Meter> for Mile {
     fn from(Meter(value): Meter) -> Self {
-        Mile(value * 0.000621371)
+        Mile(value * METER_TO_MILE)
     }
 }

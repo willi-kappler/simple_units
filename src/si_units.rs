@@ -184,3 +184,11 @@ init_unit!(KG);
 init_unit!(Newton);
 
 mul_div_unit!(KG, MeterPerSecond2, Newton);
+
+init_unit!(Joule);
+
+mul_div_unit!(Joule, Meter, Newton);
+
+init_unit!(Watt);
+
+mul_div_unit!(Watt, Second, Joule);

@@ -1,6 +1,6 @@
 //! simple_units: a simple unit system for Rust
 //!
-//! Written by Willi Kappler, Version 0.1 (2016.09.06)
+//! Written by Willi Kappler, Version 0.1 (2016.11.17)
 //!
 //! Repository: https://github.com/willi-kappler/simple_units
 //!
@@ -15,4 +15,5 @@
 #![allow(non_upper_case_globals)]
 #![allow(dead_code)]
 
-pub mod si_units;
+#[macro_use] pub mod si_units;
+#[macro_use] pub mod conversion;
