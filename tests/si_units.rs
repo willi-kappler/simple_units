@@ -18,6 +18,16 @@ fn test_meter_mul_meter() {
 }
 
 #[test]
+fn test_meter_mul_number() {
+    assert_eq!(Meter(3.0) * 4.0, Meter(12.0));
+}
+
+#[test]
+fn test_number_mul_meter() {
+    assert_eq!(4.0 * Meter(3.0), Meter(12.0));
+}
+
+#[test]
 fn test_meter_div_meter() {
     assert_eq!(Meter(10.0) / Meter(5.0), 2.0);
 }

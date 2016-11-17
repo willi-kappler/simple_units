@@ -51,6 +51,14 @@ macro_rules! init_unit {
             }
         }
 
+        impl Mul<$i> for f64 {
+            type Output = $i;
+
+            fn mul(self: f64, $i(rhs): $i) -> $i {
+                $i(self * rhs)
+            }
+        }
+
         impl Div<f64> for $i {
             type Output = $i;
 
@@ -179,11 +187,17 @@ mul_div_unit!(Meter2PerSecond2, Second2, Meter2);
 
 mul_div_unit!(MeterPerSecond, Meter2PerSecond2);
 
-init_unit!(KG);
+init_unit!(Kilogram);
+
+init_unit!(KilogramMeterPerSecond); // momentum, impulse
+
+mul_div_unit!(Kilogram, MeterPerSecond, KilogramMeterPerSecond);
 
 init_unit!(Newton);
 
-mul_div_unit!(KG, MeterPerSecond2, Newton);
+mul_div_unit!(Kilogram, MeterPerSecond2, Newton);
+
+mul_div_unit!(Newton, Second, KilogramMeterPerSecond);
 
 init_unit!(Joule);
 
@@ -192,3 +206,5 @@ mul_div_unit!(Joule, Meter, Newton);
 init_unit!(Watt);
 
 mul_div_unit!(Watt, Second, Joule);
+
+init_unit!(DegC);
