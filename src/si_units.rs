@@ -199,6 +199,10 @@ mul_div_unit!(Kilogram, MeterPerSecond2, Newton);
 
 mul_div_unit!(Newton, Second, KilogramMeterPerSecond);
 
+init_unit!(Pascal);
+
+mul_div_unit!(Pascal, Meter2, Newton);
+
 init_unit!(Joule);
 
 mul_div_unit!(Joule, Meter, Newton);

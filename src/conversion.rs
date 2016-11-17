@@ -8,22 +8,39 @@ use std::cmp::PartialEq;
 
 use ::si_units::*;
 
-// Convert from $1 to $2 using factor $e1
-// $2 = $1 * $e1
 macro_rules! convert_unit {
-    ($i1:ident, $i2:ident, $e1:expr) => {
+    // Convert from $i1 to $i2 using closure $e1
+    // Convert from $i2 to $i1 using closure $e2
+    ($i1:ident, $i2:ident, $e1:expr, $e2:expr) => {
         impl From<$i1> for $i2 {
             fn from($i1(value): $i1) -> Self {
-                $i2(value * $e1)
+                $i2($e1(value))
             }
         }
 
         impl From<$i2> for $i1 {
             fn from($i2(value): $i2) -> Self {
-                $i1(value / $e1)
+                $i1($e2(value))
             }
         }
-    }
+    };
+
+    // Convert from $i1 to $i2 using factor $i3
+    // $i2 = $i1 * $i3
+    ($i1:ident, $i2:ident, $i3:ident) => {
+        impl From<$i1> for $i2 {
+            fn from($i1(value): $i1) -> Self {
+                $i2(value * $i3)
+            }
+        }
+
+        impl From<$i2> for $i1 {
+            fn from($i2(value): $i2) -> Self {
+                $i1(value / $i3)
+            }
+        }
+    };
+
 }
 
 // TODO: move all constants to https://github.com/willi-kappler/natural_constants
@@ -52,6 +69,7 @@ const SECOND_TO_MONTH_LUNAR: f64 = SECOND_TO_DAY * 29.53; // lunar month
 
 const SECOND_TO_YEAR: f64 = SECOND_TO_DAY * 365.25; // on average
 
+const DEGC_TO_KELVIN: f64 = 273.15;
 
 init_unit!(Foot);
 init_unit!(Yard);
@@ -92,3 +110,9 @@ convert_unit!(Second, Day, SECOND_TO_DAY);
 convert_unit!(Second, Week, SECOND_TO_WEEK);
 convert_unit!(Second, Month, SECOND_TO_MONTH);
 convert_unit!(Second, Year, SECOND_TO_YEAR);
+
+init_unit!(Fahrenheit);
+init_unit!(Kelvin);
+
+convert_unit!(DegC, Kelvin, |value| {value + DEGC_TO_KELVIN}, |value| {value - DEGC_TO_KELVIN});
+convert_unit!(DegC, Fahrenheit, |value| {(value * 1.8) + 32.0}, |value| {(value - 32.0) / 1.8});
