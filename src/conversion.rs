@@ -68,6 +68,7 @@ const SECOND_TO_MONTH_SOLAR: f64 = SECOND_TO_DAY * 30.44; // solar calendar
 const SECOND_TO_MONTH_LUNAR: f64 = SECOND_TO_DAY * 29.53; // lunar month
 
 const SECOND_TO_YEAR: f64 = SECOND_TO_DAY * 365.25; // on average
+const SECOND_TO_MIL_YEAR: f64 = SECOND_TO_YEAR * 1.0e6;
 
 const DEGC_TO_KELVIN: f64 = 273.15;
 
@@ -103,6 +104,7 @@ init_unit!(Day);
 init_unit!(Week);
 init_unit!(Month);
 init_unit!(Year);
+init_unit!(MilYear);
 
 convert_unit!(Second, Minute, SECOND_TO_MINUTE);
 convert_unit!(Second, Hour, SECOND_TO_HOUR);
@@ -110,9 +112,9 @@ convert_unit!(Second, Day, SECOND_TO_DAY);
 convert_unit!(Second, Week, SECOND_TO_WEEK);
 convert_unit!(Second, Month, SECOND_TO_MONTH);
 convert_unit!(Second, Year, SECOND_TO_YEAR);
+convert_unit!(Second, MilYear, SECOND_TO_MIL_YEAR);
 
 init_unit!(Fahrenheit);
-init_unit!(Kelvin);
 
 convert_unit!(DegC, Kelvin, |value| {value + DEGC_TO_KELVIN}, |value| {value - DEGC_TO_KELVIN});
 convert_unit!(DegC, Fahrenheit, |value| {(value * 1.8) + 32.0}, |value| {(value - 32.0) / 1.8});
