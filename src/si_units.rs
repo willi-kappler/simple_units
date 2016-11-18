@@ -195,31 +195,34 @@ macro_rules! init_unit_and_inverse {
     }
 }
 
+macro_rules! power3_unit {
+    ($unit1:ident, $unit2:ident, $unit3:ident, $per_unit1:ident, $per_unit2:ident, $per_unit3:ident) => {
+        mul_div_unit!($unit1, $unit2);
+        mul_div_unit!($unit1, $unit2, $unit3);
+
+        mul_div_unit!($per_unit1, $per_unit2);
+        mul_div_unit!($per_unit1, $per_unit2, $per_unit3);
+
+        mul_div_unit!($unit1, $per_unit2, $per_unit1);
+        mul_div_unit!($unit1, $per_unit3, $per_unit2);
+
+        mul_div_unit!($unit2, $per_unit1, $unit1);
+        mul_div_unit!($unit2, $per_unit3, $per_unit1);
+
+        mul_div_unit!($unit3, $per_unit1, $unit2);
+        mul_div_unit!($unit3, $per_unit2, $unit1);
+    }
+}
+
 init_unit_and_inverse!(Meter, PerMeter);
-
 init_unit_and_inverse!(Meter2, PerMeter2);
-
 init_unit_and_inverse!(Meter3, PerMeter3);
-
-mul_div_unit!(Meter, Meter2);
-mul_div_unit!(Meter, Meter2, Meter3);
-
-mul_div_unit!(PerMeter, PerMeter2);
-mul_div_unit!(PerMeter, PerMeter2, PerMeter3);
+power3_unit!(Meter, Meter2, Meter3, PerMeter, PerMeter2, PerMeter3);
 
 init_unit_and_inverse!(Second, PerSecond);
-
 init_unit_and_inverse!(Second2, PerSecond2);
-
 init_unit_and_inverse!(Second3, PerSecond3);
-
-mul_div_unit!(Second, Second2);
-mul_div_unit!(Second, Second2, Second3);
-
-mul_div_unit!(PerSecond, PerSecond2);
-mul_div_unit!(PerSecond, PerSecond2, PerSecond3);
-
-mul_div_unit!(Second, PerSecond2, PerSecond);
+power3_unit!(Second, Second2, Second3, PerSecond, PerSecond2, PerSecond3);
 
 init_unit_and_inverse!(MeterPerSecond, SecondPerMeter);
 
