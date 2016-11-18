@@ -214,6 +214,28 @@ macro_rules! power3_unit {
     }
 }
 
+macro_rules! combine_unit {
+    ($unit1:ident, $per_unit1:ident, $unit2:ident, $per_unit2:ident, $unit1_unit2:ident, $unit1_per_unit2:ident, $unit2_per_unit1:ident, $per_unit1_unit2:ident) => {
+        mul_div_unit!($unit1, $unit2, $unit1_unit2);
+        mul_div_unit!($unit1, $per_unit2, $unit1_per_unit2);
+
+        mul_div_unit!($unit1_per_unit2, $unit2, $unit1);
+        mul_div_unit!($unit1_per_unit2, $per_unit1, $per_unit2);
+
+        mul_div_unit!($unit2_per_unit1, $unit1, $unit2);
+        mul_div_unit!($unit2_per_unit1, $per_unit2, $per_unit1);
+
+        mul_div_unit!($unit2, $per_unit1, $unit2_per_unit1);
+        mul_div_unit!($per_unit1, $per_unit2, $per_unit1_unit2);
+
+        mul_div_unit!($unit1_unit2, $per_unit1, $unit2);
+        mul_div_unit!($unit1_unit2, $per_unit2, $unit1);
+
+        mul_div_unit!($per_unit1_unit2, $unit1, $per_unit2);
+        mul_div_unit!($per_unit1_unit2, $unit2, $per_unit1);
+    }
+}
+
 init_unit_and_inverse!(Meter, PerMeter);
 init_unit_and_inverse!(Meter2, PerMeter2);
 init_unit_and_inverse!(Meter3, PerMeter3);
@@ -225,36 +247,21 @@ init_unit_and_inverse!(Second3, PerSecond3);
 power3_unit!(Second, Second2, Second3, PerSecond, PerSecond2, PerSecond3);
 
 init_unit_and_inverse!(MeterPerSecond, SecondPerMeter);
-
-mul_div_unit!(MeterPerSecond, Second, Meter);
-mul_div_unit!(Meter, PerSecond, MeterPerSecond);
-mul_div_unit!(MeterPerSecond, PerMeter, PerSecond);
-
-mul_div_unit!(SecondPerMeter, Meter, Second);
-mul_div_unit!(Second, PerMeter, SecondPerMeter);
-
 init_unit_and_inverse!(MeterPerSecond2, Second2PerMeter);
-
-mul_div_unit!(MeterPerSecond2, Second, MeterPerSecond);
-mul_div_unit!(MeterPerSecond2, Second2, Meter);
-mul_div_unit!(MeterPerSecond, PerSecond, MeterPerSecond2);
-
 init_unit_and_inverse!(Meter2PerSecond, SecondPerMeter2);
-
-mul_div_unit!(MeterPerSecond, Meter, Meter2PerSecond);
-mul_div_unit!(Meter2, PerSecond, Meter2PerSecond);
-mul_div_unit!(Meter2PerSecond, PerMeter, MeterPerSecond);
-
 init_unit_and_inverse!(Meter2PerSecond2, Second2PerMeter2);
-
-mul_div_unit!(Meter2PerSecond2, Second, Meter2PerSecond);
-mul_div_unit!(Meter2PerSecond2, Second2, Meter2);
-mul_div_unit!(MeterPerSecond, Meter2PerSecond2);
-
+init_unit_and_inverse!(MeterSecond, PerMeterSecond);
 init_unit_and_inverse!(Meter2Second, PerMeter2Second);
+init_unit_and_inverse!(MeterSecond2, PerMeterSecond2);
+init_unit_and_inverse!(Meter2Second2, PerMeter2Second2);
 
-mul_div_unit!(Meter2, Second, Meter2Second);
+combine_unit!(Meter, PerMeter, Second, PerSecond, MeterSecond, MeterPerSecond, SecondPerMeter, PerMeterSecond);
+combine_unit!(Meter2, PerMeter2, Second, PerSecond, Meter2Second, Meter2PerSecond, SecondPerMeter2, PerMeter2Second);
+combine_unit!(Meter, PerMeter, Second2, PerSecond2, MeterSecond2, MeterPerSecond2, Second2PerMeter, PerMeterSecond2);
+combine_unit!(Meter2, PerMeter2, Second2, PerSecond2, Meter2Second2, Meter2PerSecond2, Second2PerMeter2, PerMeter2Second2);
+
 mul_div_unit!(PerSecond2, Meter2Second, Meter2PerSecond);
+
 
 init_unit_and_inverse!(Kilogram, PerKilogram);
 
