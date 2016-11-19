@@ -13,11 +13,6 @@ fn test_meter_sub() {
 }
 
 #[test]
-fn test_meter_mul_meter() {
-    assert_eq!(Meter(2.5) * Meter(4.0), Meter2(10.0));
-}
-
-#[test]
 fn test_meter_mul_number() {
     assert_eq!(Meter(3.0) * 4.0, Meter(12.0));
 }
@@ -38,18 +33,27 @@ fn test_meter_div_number() {
 }
 
 #[test]
-fn meter2_div_meter() {
-    assert_eq!(Meter2(12.0) / Meter(3.0), Meter(4.0));
+fn test_inverse() {
+    assert_eq!(Meter(2.4) * PerMeter(2.0), 4.8);
+    assert_eq!(5.0 / Meter(2.0), PerMeter(2.5));
 }
 
 #[test]
-fn meter3_div_meter() {
-    assert_eq!(Meter3(18.0) / Meter(3.0), Meter2(6.0));
-}
+fn test_power3() {
+    assert_eq!(Meter(2.5) * Meter(2.0), Meter2(5.0));
+    assert_eq!(Meter2(1.5) * Meter(2.0), Meter3(3.0));
+    assert_eq!(Meter(1.5) * Meter2(2.0), Meter3(3.0));
 
-#[test]
-fn meter3_div_meter2() {
-    assert_eq!(Meter3(24.0) / Meter2(4.0), Meter(6.0));
+    assert_eq!(Meter2(9.0) / Meter(3.0), Meter(3.0));
+    assert_eq!(Meter3(15.0) / Meter(2.0), Meter2(7.5));
+    assert_eq!(Meter3(8.4) / Meter2(2.0), Meter(4.2));
+
+    assert_eq!(PerMeter(2.5) * PerMeter(2.0), PerMeter2(5.0));
+    assert_eq!(PerMeter2(1.5) * PerMeter(2.0), PerMeter3(3.0));
+    assert_eq!(PerMeter(1.5) * PerMeter2(2.0), PerMeter3(3.0));
+
+
+
 }
 
 #[test]
