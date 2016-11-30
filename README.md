@@ -79,3 +79,28 @@ fn main() {
     // let length_sum = length_in_m + (length_in_foot as Meter);
 }
 ```
+
+I have plans for a better unit system, based on *build.rs* and comments: Basically that means to scan all \*.rs Rust source files and evaluate the expressions that have a special comment:
+
+```rust
+fn main() {
+    let length = 20.72; // #[m]
+    let time = 12.39; // #[s]
+
+    // Resulting type: #[m / s]
+    // No need to specify, will be infered
+    let velocity = length / time;
+
+    // build.rs will give an error:
+    // let error = length + time;
+
+    // Multiply by #[s] gives you #[m]:
+    let duration = 35.0; // #[s]
+    let distance = velocity * duration; // This would be #[m], but could be omitted
+}
+```
+
+Note the special ```#[]``` notation to describe units. Between the comment begin token and the unit description only space and tabs will be allowed. After that you can place any comments. Otherwise the unit description will be ignored as in the example above.
+
+
+This will work on stable Rust.
