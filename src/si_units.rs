@@ -325,6 +325,8 @@ mul_div_unit!(JoulePerKelvinMol, Kelvin2, JouleKelvinPerMol);
 
 init_unit_and_inverse!(SecondPerMol, MolPerSecond);
 
+init_unit_and_inverse!(JouleKelvinPerMolSecond, MolSecondPerJouleKelvin);
+
 mul_div_unit!(SecondPerMol, JouleKelvinPerSecond, JouleKelvinPerMol);
 
 mul_div_unit!(Mol, SecondPerMol, Second);
@@ -332,3 +334,10 @@ mul_div_unit!(Mol, SecondPerMol, Second);
 mul_div_unit!(Mol, JoulePerKelvinMol, JoulePerKelvin);
 
 mul_div_unit!(Kelvin, JoulePerKelvin, Joule);
+
+mul_div_unit!(JoulePerMol, KelvinPerSecond, JouleKelvinPerMolSecond);
+
+mul_div_unit!(Kelvin,  JoulePerKelvinMol, JoulePerMol);
+
+mul_div_unit!(Second, JouleKelvinPerMolSecond, JouleKelvinPerMol);
+
