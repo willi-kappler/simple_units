@@ -7,10 +7,10 @@ A simple unit system for Rust.
 It allows you to write numeric code that is not only type save but also "unit save".
 
 It works on stable Rust, but unfortunately that means it doesn't scale.
-All units (and combination of them) must we written by hand.
+All units (and combination of them) must be written by hand.
 Macros help (and maybe some more macro magic can help more) but it is still a lot of work.
 
-For me it already payed off: I found a small bug in an old Fortran program the we are using ;-)
+For me it already payed off: I found a small bug in an old Fortran program we are using ;-)
 
 So if your favorite unit is missing just let me know.
 
@@ -88,7 +88,7 @@ fn main() {
     let time = 12.39; // #[s]
 
     // Resulting type: #[m / s]
-    // No need to specify, will be infered
+    // No need to specify, will be inferred
     let velocity = length / time;
 
     // build.rs will give an error:

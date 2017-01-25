@@ -1,5 +1,5 @@
 //! Data types and utility function for units:
-//! Implemet a poor man's unit type system for now...
+//! Implement a poor man's unit type system for now...
 //!
 //! Maybe we can have s.th. like this (F#) for Rust: https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure
 //! Alternatively, see here:
