@@ -16,6 +16,8 @@ So if your favorite unit is missing just let me know.
 
 There already is a better unit system for Rust: [Dimensioned](https://github.com/paholg/dimensioned) but it needs the unstable nightly compiler version.
 
+And another one here: [runits](https://github.com/jesse99/runits)
+
 ## Examples:
 
 ```rust
