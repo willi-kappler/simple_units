@@ -14,7 +14,7 @@ For me it already payed off: I found a small bug in an old Fortran program we ar
 
 So if your favorite unit is missing just let me know.
 
-There already is a better unit system for Rust: [Dimensioned](https://github.com/paholg/dimensioned), needs at least Rust 1.15.
+There already is a better unit system for Rust: [Dimensioned](https://github.com/paholg/dimensioned/tree/rmdim), needs at least Rust 1.15.
 
 And another one here: [runits](https://github.com/jesse99/runits) and here: [uom](https://github.com/iliekturtles/uom)
 
