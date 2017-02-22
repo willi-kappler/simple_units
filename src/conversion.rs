@@ -8,7 +8,15 @@ use std::cmp::PartialEq;
 
 use ::si_units::*;
 
-macro_rules! convert_unit {
+/// This macro implements *From* for the given units.
+/// It either uses a factor or a closure to calculate the conversion
+///
+/// #Example:
+///
+/// ```
+/// convert_unit!(Second, Minute, 60.0);
+/// ```
+#[macro_export] macro_rules! convert_unit {
     // Convert from $i1 to $i2 using closure $e1
     // Convert from $i2 to $i1 using closure $e2
     ($i1:ident, $i2:ident, $e1:expr, $e2:expr) => {
