@@ -1,6 +1,6 @@
 //! simple_units: a simple unit system for Rust
 //!
-//! Written by Willi Kappler, Version 0.1 (2016.11.17)
+//! Written by Willi Kappler, Version 0.1 (2017.02.22)
 //!
 //! Repository: https://github.com/willi-kappler/simple_units
 //!
