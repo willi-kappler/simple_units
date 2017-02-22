@@ -18,7 +18,13 @@ use std::ops::Div;
 use std::cmp::PartialEq;
 
 /// This macro initializes a new unit
-macro_rules! init_unit {
+///
+/// #Example:
+///
+/// ```
+/// init_unit!(Meter);
+/// ```
+#[macro_export] macro_rules! init_unit {
     ($unit:ident) => {
         #[derive(Debug,Clone,Copy)]
         pub struct $unit(pub f64);
@@ -86,7 +92,13 @@ macro_rules! init_unit {
 }
 
 /// This macro implements multiplication and division for a given unit
-macro_rules! mul_div_unit {
+///
+/// #Example:
+///
+/// ```
+/// mul_div_unit!(Joule, Meter, Newton);
+/// ```
+#[macro_export] macro_rules! mul_div_unit {
     // $unit1 * $unit2 = $unit3
     // $unit2 * $unit1 = $unit3
     // $unit1 = $unit3 / $unit2
@@ -153,7 +165,13 @@ macro_rules! mul_div_unit {
 }
 
 /// This macro implements the inverse of the given unit
-macro_rules! inverse_unit {
+///
+/// #Example:
+///
+/// ```
+/// inverse_unit!(Meter, PerMeter);
+/// ```
+#[macro_export] macro_rules! inverse_unit {
     ($unit1:ident, $unit2:ident) => {
         // A * B = 1
         impl Mul<$unit2> for $unit1 {
@@ -196,7 +214,13 @@ macro_rules! inverse_unit {
 }
 
 /// This macro implements a new unit and the inverse unit
-macro_rules! init_unit_and_inverse {
+///
+/// #Example:
+///
+/// ```
+/// init_unit_and_inverse!(Meter, PerMeter);
+/// ```
+#[macro_export] macro_rules! init_unit_and_inverse {
     ($unit1:ident, $per_unit1:ident) => {
         init_unit!($unit1);
         init_unit!($per_unit1);
@@ -204,8 +228,14 @@ macro_rules! init_unit_and_inverse {
     }
 }
 
-/// This macro implements unit^2, unit^3, 1/unit^2 and 1/unit^3
-macro_rules! power3_unit {
+/// This macro implements unit^1, unit^2, unit^3, 1/unit^1, 1/unit^2 and 1/unit^3
+///
+/// #Example:
+///
+/// ```
+/// power3_unit!(Second, Second2, Second3, PerSecond, PerSecond2, PerSecond3);
+/// ```
+#[macro_export] macro_rules! power3_unit {
     ($unit1:ident, $unit2:ident, $unit3:ident, $per_unit1:ident, $per_unit2:ident, $per_unit3:ident) => {
         mul_div_unit!($unit1, $unit2);
         mul_div_unit!($unit1, $unit2, $unit3);
@@ -225,7 +255,13 @@ macro_rules! power3_unit {
 }
 
 /// This macro combines two units and some permutation / inverse
-macro_rules! combine_unit {
+///
+/// #Example:
+///
+/// ```
+/// combine_unit!(Meter, PerMeter, Second, PerSecond, MeterSecond, MeterPerSecond, SecondPerMeter, PerMeterSecond);
+/// ```
+#[macro_export] macro_rules! combine_unit {
     ($unit1:ident, $per_unit1:ident, $unit2:ident, $per_unit2:ident, $unit1_unit2:ident, $unit1_per_unit2:ident, $unit2_per_unit1:ident, $per_unit1_unit2:ident) => {
         mul_div_unit!($unit1, $unit2, $unit1_unit2);
         mul_div_unit!($unit1, $per_unit2, $unit1_per_unit2);
@@ -351,3 +387,5 @@ mul_div_unit!(JoulePerMol, KelvinPerSecond, JouleKelvinPerMolSecond);
 mul_div_unit!(Kelvin,  JoulePerKelvinMol, JoulePerMol);
 
 mul_div_unit!(Second, JouleKelvinPerMolSecond, JouleKelvinPerMol);
+
+// TODO: add more units...
