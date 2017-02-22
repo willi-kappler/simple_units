@@ -11,10 +11,21 @@ use ::si_units::*;
 /// This macro implements *From* for the given units.
 /// It either uses a factor or a closure to calculate the conversion
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
-/// convert_unit!(Second, Minute, 60.0);
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
+/// const factor: f64 = 60.0;
+/// init_unit!(Second);
+/// init_unit!(Minute);
+/// convert_unit!(Second, Minute, factor);
+/// # }
 /// ```
 #[macro_export] macro_rules! convert_unit {
     // Convert from $i1 to $i2 using closure $e1
