@@ -5,11 +5,6 @@
 //!
 //! https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure
 //!
-//! Alternatively, see here:
-//!
-//! https://www.reddit.com/r/rust/comments/37qut9/typesafe_userdefined_units_of_measure_for_rust/
-//!
-//! https://blog.mozilla.org/research/2014/06/23/static-checking-of-units-in-servo/
 
 use std::ops::Add;
 use std::ops::Sub;

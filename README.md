@@ -20,6 +20,18 @@ And another one here: [runits](https://github.com/jesse99/runits) and here: [uom
 
 There is also a crate to help you convert between units: [rink-rs](https://github.com/tiffany352/rink-rs/)
 
+## Notes
+
+There are some blog posts / notes about unit systems in Rust:
+
+https://www.reddit.com/r/rust/comments/37qut9/typesafe_userdefined_units_of_measure_for_rust/
+
+https://blog.mozilla.org/research/2014/06/23/static-checking-of-units-in-servo/
+
+https://github.com/jaheba/stuff/blob/master/communicating_intent.md
+
+https://www.reddit.com/r/rust/comments/5uacxs/types_units_and_quantities/
+
 ## Examples:
 
 ```rust
