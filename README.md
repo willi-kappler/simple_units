@@ -16,7 +16,7 @@ So if your favorite unit is missing just let me know.
 
 There already is a better unit system for Rust: [Dimensioned](https://github.com/paholg/dimensioned/tree/rmdim), needs at least Rust 1.15.
 
-And another one here: [runits](https://github.com/jesse99/runits) and here: [uom](https://github.com/iliekturtles/uom)
+And another one here: [runits](https://github.com/jesse99/runits), here: [units](https://github.com/Boddlnagg/units) and here: [uom](https://github.com/iliekturtles/uom)
 
 There is also a crate to help you convert between units: [rink-rs](https://github.com/tiffany352/rink-rs/)
 
