@@ -4,7 +4,7 @@
 
 A simple unit system for Rust.
 
-It allows you to write numeric code that is not only type save but also "unit save".
+It allows you to write numeric code that is not only type safe but also "unit safe".
 
 It works on stable Rust, but unfortunately that means it doesn't scale.
 All units (and combination of them) must be written by hand.
