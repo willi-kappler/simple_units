@@ -14,10 +14,18 @@ use std::cmp::PartialEq;
 
 /// This macro initializes a new unit
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
 /// init_unit!(Meter);
+/// # }
 /// ```
 #[macro_export] macro_rules! init_unit {
     ($unit:ident) => {
@@ -88,10 +96,21 @@ use std::cmp::PartialEq;
 
 /// This macro implements multiplication and division for a given unit
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
+/// init_unit!(Joule);
+/// init_unit!(Meter);
+/// init_unit!(Newton);
 /// mul_div_unit!(Joule, Meter, Newton);
+/// # }
 /// ```
 #[macro_export] macro_rules! mul_div_unit {
     // $unit1 * $unit2 = $unit3
@@ -161,10 +180,20 @@ use std::cmp::PartialEq;
 
 /// This macro implements the inverse of the given unit
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
+/// init_unit!(Meter);
+/// init_unit!(PerMeter);
 /// inverse_unit!(Meter, PerMeter);
+/// # }
 /// ```
 #[macro_export] macro_rules! inverse_unit {
     ($unit1:ident, $unit2:ident) => {
@@ -210,10 +239,18 @@ use std::cmp::PartialEq;
 
 /// This macro implements a new unit and the inverse unit
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
 /// init_unit_and_inverse!(Meter, PerMeter);
+/// # }
 /// ```
 #[macro_export] macro_rules! init_unit_and_inverse {
     ($unit1:ident, $per_unit1:ident) => {
@@ -225,10 +262,24 @@ use std::cmp::PartialEq;
 
 /// This macro implements unit^1, unit^2, unit^3, 1/unit^1, 1/unit^2 and 1/unit^3
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
+/// init_unit!(Second);
+/// init_unit!(Second2);
+/// init_unit!(Second3);
+/// init_unit!(PerSecond);
+/// init_unit!(PerSecond2);
+/// init_unit!(PerSecond3);
 /// power3_unit!(Second, Second2, Second3, PerSecond, PerSecond2, PerSecond3);
+/// # }
 /// ```
 #[macro_export] macro_rules! power3_unit {
     ($unit1:ident, $unit2:ident, $unit3:ident, $per_unit1:ident, $per_unit2:ident, $per_unit3:ident) => {
@@ -251,10 +302,26 @@ use std::cmp::PartialEq;
 
 /// This macro combines two units and some permutation / inverse
 ///
-/// #Example:
+/// # Example:
 ///
 /// ```
+/// # #[macro_use] extern crate simple_units;
+/// # use std::ops::Add;
+/// # use std::ops::Sub;
+/// # use std::ops::Mul;
+/// # use std::ops::Div;
+/// # use std::cmp::PartialEq;
+/// # fn main() {
+/// init_unit!(Meter);
+/// init_unit!(PerMeter);
+/// init_unit!(Second);
+/// init_unit!(PerSecond);
+/// init_unit!(MeterSecond);
+/// init_unit!(MeterPerSecond);
+/// init_unit!(SecondPerMeter);
+/// init_unit!(PerMeterSecond);
 /// combine_unit!(Meter, PerMeter, Second, PerSecond, MeterSecond, MeterPerSecond, SecondPerMeter, PerMeterSecond);
+/// # }
 /// ```
 #[macro_export] macro_rules! combine_unit {
     ($unit1:ident, $per_unit1:ident, $unit2:ident, $per_unit2:ident, $unit1_unit2:ident, $unit1_per_unit2:ident, $unit2_per_unit1:ident, $per_unit1_unit2:ident) => {
