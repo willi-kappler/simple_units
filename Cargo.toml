@@ -7,7 +7,7 @@ description = "A simple unit sytem for Rust"
 readme = "README.md"
 repository = "https://github.com/willi-kappler/simple_units"
 keywords = ["units", "physics", "measure", "science"]
-documentation = "https://docs.rs/simple-units/0.1.0/simple_units/"
+documentation = "https://docs.rs/simple_units/0.1.0/simple_units/"
 
 [dependencies]
 # clippy = "*"
