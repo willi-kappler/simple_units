@@ -1,9 +1,14 @@
 //! Data types and utility function for units:
 //! Implement a poor man's unit type system for now...
 //!
-//! Maybe we can have s.th. like this (F#) for Rust: https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure
+//! Maybe we can have s.th. like this (F#) for Rust:
+//!
+//! https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure
+//!
 //! Alternatively, see here:
+//!
 //! https://www.reddit.com/r/rust/comments/37qut9/typesafe_userdefined_units_of_measure_for_rust/
+//!
 //! https://blog.mozilla.org/research/2014/06/23/static-checking-of-units-in-servo/
 
 use std::ops::Add;
@@ -12,6 +17,7 @@ use std::ops::Mul;
 use std::ops::Div;
 use std::cmp::PartialEq;
 
+/// This macro initializes a new unit
 macro_rules! init_unit {
     ($unit:ident) => {
         #[derive(Debug,Clone,Copy)]
@@ -79,6 +85,7 @@ macro_rules! init_unit {
     }
 }
 
+/// This macro implements multiplication and division for a given unit
 macro_rules! mul_div_unit {
     // $unit1 * $unit2 = $unit3
     // $unit2 * $unit1 = $unit3
@@ -145,6 +152,7 @@ macro_rules! mul_div_unit {
     }
 }
 
+/// This macro implements the inverse of the given unit
 macro_rules! inverse_unit {
     ($unit1:ident, $unit2:ident) => {
         // A * B = 1
@@ -187,6 +195,7 @@ macro_rules! inverse_unit {
     }
 }
 
+/// This macro implements a new unit and the inverse unit
 macro_rules! init_unit_and_inverse {
     ($unit1:ident, $per_unit1:ident) => {
         init_unit!($unit1);
@@ -195,6 +204,7 @@ macro_rules! init_unit_and_inverse {
     }
 }
 
+/// This macro implements unit^2, unit^3, 1/unit^2 and 1/unit^3
 macro_rules! power3_unit {
     ($unit1:ident, $unit2:ident, $unit3:ident, $per_unit1:ident, $per_unit2:ident, $per_unit3:ident) => {
         mul_div_unit!($unit1, $unit2);
@@ -214,6 +224,7 @@ macro_rules! power3_unit {
     }
 }
 
+/// This macro combines two units and some permutation / inverse
 macro_rules! combine_unit {
     ($unit1:ident, $per_unit1:ident, $unit2:ident, $per_unit2:ident, $unit1_unit2:ident, $unit1_per_unit2:ident, $unit2_per_unit1:ident, $per_unit1_unit2:ident) => {
         mul_div_unit!($unit1, $unit2, $unit1_unit2);
@@ -340,4 +351,3 @@ mul_div_unit!(JoulePerMol, KelvinPerSecond, JouleKelvinPerMolSecond);
 mul_div_unit!(Kelvin,  JoulePerKelvinMol, JoulePerMol);
 
 mul_div_unit!(Second, JouleKelvinPerMolSecond, JouleKelvinPerMol);
-
