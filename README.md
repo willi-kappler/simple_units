@@ -18,6 +18,8 @@ There already is a better unit system for Rust: [Dimensioned](https://github.com
 
 And another one here: [runits](https://github.com/jesse99/runits) and here: [uom](https://github.com/iliekturtles/uom)
 
+There is also a crate to help you convert between units: [rink-rs](https://github.com/tiffany352/rink-rs/)
+
 ## Examples:
 
 ```rust
