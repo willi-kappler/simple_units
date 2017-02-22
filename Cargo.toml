@@ -1,7 +1,7 @@
 [package]
 name = "simple_units"
 version = "0.1.0"
-authors = ["Willi Kappler, grandor@gmx.de"]
+authors = ["Willi Kappler grandor@gmx.de"]
 license = "MIT"
 description = "A simple unit sytem for Rust"
 readme = "README.md"
