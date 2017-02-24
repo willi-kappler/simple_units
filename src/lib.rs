@@ -6,6 +6,13 @@
 //!
 //! License: MIT
 //!
+//! Data types and utility function for units:
+//! Implement a poor man's unit type system for now...
+//!
+//! Maybe we can have s.th. like this (F#) for Rust:
+//!
+//! https://en.wikibooks.org/wiki/F_Sharp_Programming/Units_of_Measure
+//!
 
 // For clippy
 // #![feature(plugin)]
@@ -15,5 +22,6 @@
 #![allow(non_upper_case_globals)]
 #![allow(dead_code)]
 
-#[macro_use] pub mod si_units;
-#[macro_use] pub mod conversion;
+#[macro_use] pub mod macros;
+pub mod si_units;
+pub mod conversion;

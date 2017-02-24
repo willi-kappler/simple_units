@@ -37,7 +37,7 @@ fn test_inverse() {
     assert_eq!(Meter(2.4) * PerMeter(2.0), 4.8);
     assert_eq!(5.0 / Meter(2.0), PerMeter(2.5));
 }
-
+#[test]
 fn test_power3_unit() {
     assert_eq!(Meter(2.5) * Meter(3.0), Meter2(7.5));
     assert_eq!(Meter(2.0) * Meter2(3.0), Meter3(6.0));

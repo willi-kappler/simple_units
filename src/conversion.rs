@@ -1,3 +1,11 @@
+//! simple_units: a simple unit system for Rust
+//!
+//! Written by Willi Kappler, Version 0.1 (2017.02.22)
+//!
+//! Repository: https://github.com/willi-kappler/simple_units
+//!
+//! License: MIT
+//!
 //! Conversion between units
 
 use std::ops::Add;
@@ -7,60 +15,6 @@ use std::ops::Div;
 use std::cmp::PartialEq;
 
 use ::si_units::*;
-
-/// This macro implements *From* for the given units.
-/// It either uses a factor or a closure to calculate the conversion
-///
-/// # Example:
-///
-/// ```
-/// # #[macro_use] extern crate simple_units;
-/// # use std::ops::Add;
-/// # use std::ops::Sub;
-/// # use std::ops::Mul;
-/// # use std::ops::Div;
-/// # use std::cmp::PartialEq;
-/// # fn main() {
-/// const factor: f64 = 60.0;
-/// init_unit!(Second);
-/// init_unit!(Minute);
-/// convert_unit!(Second, Minute, factor);
-/// # }
-/// ```
-#[macro_export] macro_rules! convert_unit {
-    // Convert from $i1 to $i2 using closure $e1
-    // Convert from $i2 to $i1 using closure $e2
-    ($i1:ident, $i2:ident, $e1:expr, $e2:expr) => {
-        impl From<$i1> for $i2 {
-            fn from($i1(value): $i1) -> Self {
-                $i2($e1(value))
-            }
-        }
-
-        impl From<$i2> for $i1 {
-            fn from($i2(value): $i2) -> Self {
-                $i1($e2(value))
-            }
-        }
-    };
-
-    // Convert from $i1 to $i2 using factor $i3
-    // $i2 = $i1 * $i3
-    ($i1:ident, $i2:ident, $i3:ident) => {
-        impl From<$i1> for $i2 {
-            fn from($i1(value): $i1) -> Self {
-                $i2(value * $i3)
-            }
-        }
-
-        impl From<$i2> for $i1 {
-            fn from($i2(value): $i2) -> Self {
-                $i1(value / $i3)
-            }
-        }
-    };
-
-}
 
 // TODO: move all constants to https://github.com/willi-kappler/natural_constants
 
